@@ -1,9 +1,9 @@
-resource "aws_ecr_repository" "aws_terraform-ecr" {
-  name = "aws_terraform-ecr"
+resource "aws_ecr_repository" "ecr" {
+  name = "aws-terraform-ecr"
 }
 
-resource "aws_ecr_lifecycle_policy" "aws_terraform-ecr_lifecycle_policy" {
-  repository = "${aws_ecr_repository.aws_terraform-ecr.name}"
+resource "aws_ecr_lifecycle_policy" "ecr-lp" {
+  repository = "${aws_ecr_repository.ecr.name}"
 
   policy = <<EOF
 {
@@ -27,5 +27,5 @@ EOF
 }
 
 output "ecr_repository_url" {
-  value = "${aws_ecr_repository.aws_terraform-ecr.repository_url}"
+  value = "${aws_ecr_repository.ecr.repository_url}"
 }
