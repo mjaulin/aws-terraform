@@ -25,3 +25,7 @@ resource "aws_ecr_lifecycle_policy" "aws_terraform-ecr_lifecycle_policy" {
 }
 EOF
 }
+
+output "ecr_repository_url" {
+  value = "${aws_ecr_repository.aws_terraform-ecr.repository_url}"
+}

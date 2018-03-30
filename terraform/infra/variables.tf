@@ -17,6 +17,11 @@ variable "cidr_block" {
   default     = "10.0.0.0/16"
 }
 
+variable "ami_id" {
+  description = "AMI For ECS"
+  default     = "ami-914afcec"
+}
+
 locals {
   default_tags = {
     Name        = "aws_terraform"

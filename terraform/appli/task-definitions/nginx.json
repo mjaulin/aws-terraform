@@ -1,7 +1,7 @@
 [
   {
     "name": "nginx",
-    "image": "${aws_ecr_repository.aws_terraform-ecr.repository_url}",
+    "image": "${ecr_repository_url}",
     "cpu": 4,
     "memory": 128,
     "essential": true,

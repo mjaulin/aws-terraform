@@ -37,3 +37,7 @@ resource "aws_lb_listener" "aws_terraform-lb_listener" {
     type             = "forward"
   }
 }
+
+output "elb_target_group_arn" {
+  value = "${aws_lb_target_group.aws_terraform-lb_target_group.arn}"
+}
