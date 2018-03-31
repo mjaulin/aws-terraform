@@ -15,10 +15,9 @@ resource "aws_security_group" "sg-elb" {
   }
 
   egress {
-    description = "HTTP"
     protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 0
+    to_port     = 65535
     cidr_blocks = ["0.0.0.0/0"]
   }
 

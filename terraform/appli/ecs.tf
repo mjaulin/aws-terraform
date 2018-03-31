@@ -19,7 +19,7 @@ resource "aws_ecs_service" "ecs-service" {
   name            = "aws_terraform-service"
   cluster         = "${var.ecs_cluster_id}"
   task_definition = "${aws_ecs_task_definition.ecs-task.arn}"
-  desired_count   = 0
+  desired_count   = 1
 
   load_balancer {
     target_group_arn = "${var.elb_target_group_arn}"

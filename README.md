@@ -11,7 +11,7 @@ $ aws configure
 ```
 cd terraform/infra && \
 terraform init && \
-terraform apply && \
+terraform apply -auto-approve && \
 cd ../../
 ```
 
@@ -28,7 +28,7 @@ terraform init && \
 ## Deploy container
 
 ```
-terraform apply && \
+terraform apply -auto-approve && \
 cd ../../
 ```
 
