@@ -1,5 +1,5 @@
 ecs_cluster_id="aws-terraform-cluster"
 ecr_repository_url_front="814640353927.dkr.ecr.eu-west-3.amazonaws.com/aws-terraform-ecr-front"
 ecr_repository_url_back="814640353927.dkr.ecr.eu-west-3.amazonaws.com/aws-terraform-ecr-back"
-elb_target_group_arn_front="arn:aws:elasticloadbalancing:eu-west-3:814640353927:targetgroup/aws-terraform-elb-tg-front/c927d486b645a991"
-elb_target_group_arn_back="arn:aws:elasticloadbalancing:eu-west-3:814640353927:targetgroup/aws-terraform-elb-tg-back/baab73aa349c73ee"
+elb_target_group_arn_front="arn:aws:elasticloadbalancing:eu-west-3:814640353927:targetgroup/aws-terraform-elb-tg-front/1454d6b28eb509e4"
+elb_target_group_arn_back="arn:aws:elasticloadbalancing:eu-west-3:814640353927:targetgroup/aws-terraform-elb-tg-back/7c2456c919e7a151"

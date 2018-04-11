@@ -1,0 +1,4 @@
+resource "aws_key_pair" "aws-terraform" {
+  key_name = "aws-terraform-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeTCrOxwj7gq5zXCKeciGT1d7UIktWNR6UYgliNlI79tX60wxVS2JYB1xXmjN71iUuiHf75cM13LpTeZYLGEJUFStl8mEvX9sm4NyrxIV8nD7jue5yUApK4YklJvlIAGDql29ZzlYgXy+3Px4oX98nE1TZxmTA1Jbe0mobGDhAXUZGuYw2qW004ABMskMzZGvBIH3rVbeeWx+9YFjSy7jQ+QTxQD3wH+nhSoWJy4kobTkF8AOUW4xVvK47yem8bvedmIiGpp2W+kvWqTPvhFjs56QuEu6Z+en1Thnxi5+adRQsrnGqwCvOpqZH9OM29deI26PODWn7/ZRwFc/WlbgB"
+}

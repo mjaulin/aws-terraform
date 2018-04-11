@@ -8,10 +8,17 @@ resource "aws_security_group" "sg-ecs" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    protocol        = "tcp"
     from_port       = 0
+    protocol        = "tcp"
     to_port         = 65535
     security_groups = ["${var.elb_securiy_id}"]
+  }
+
+  ingress {
+    from_port = 22
+    protocol = "tcp"
+    to_port = 22
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -31,6 +38,7 @@ resource "aws_launch_configuration" "lc" {
   user_data                   = "${data.template_file.user_data.rendered}"
   iam_instance_profile        = "${aws_iam_instance_profile.iam-ip.name}"
   associate_public_ip_address = true
+  key_name                    = "${aws_key_pair.aws-terraform.key_name}"
 
   lifecycle {
     create_before_destroy = true

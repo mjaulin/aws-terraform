@@ -3,7 +3,7 @@
     "name": "back",
     "image": "${ecr_repository_url}",
     "cpu": 4,
-    "memory": 128,
+    "memory": 512,
     "essential": true,
     "portMappings": [
       {
