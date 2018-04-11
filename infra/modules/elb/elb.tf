@@ -33,9 +33,29 @@ resource "aws_lb" "lb" {
   tags = "${var.default_tags}"
 }
 
-resource "aws_lb_target_group" "lb-tg" {
-  name     = "aws-terraform-elb-target-group"
+resource "aws_lb_target_group" "lb-tg-front" {
+  name     = "aws-terraform-elb-tg-front"
   port     = 80
+  protocol = "HTTP"
+  vpc_id   = "${var.vpc_id}"
+
+  health_check {
+    protocol            = "HTTP"
+    port                = "traffic-port"
+    path                = "/health"
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+    timeout             = 5
+    interval            = 30
+    matcher             = "204"
+  }
+
+  tags = "${var.default_tags}"
+}
+
+resource "aws_lb_target_group" "lb-tg-back" {
+  name     = "aws-terraform-elb-tg-back"
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
 
@@ -59,15 +79,38 @@ resource "aws_lb_listener" "aws_terraform-lb_listener" {
   port              = 80
 
   default_action {
-    target_group_arn = "${aws_lb_target_group.lb-tg.arn}"
+    target_group_arn = "${aws_lb_target_group.lb-tg-front.arn}"
     type             = "forward"
   }
 }
 
-output "elb_target_group_arn" {
-  value = "${aws_lb_target_group.lb-tg.arn}"
+resource "aws_lb_listener_rule" "api" {
+  listener_arn = "${aws_lb_listener.aws_terraform-lb_listener.arn}"
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.lb-tg-back.arn}"
+  }
+
+  condition {
+    field  = "path-pattern"
+    values = ["/api/*"]
+  }
+}
+
+output "elb_target_group_arn_front" {
+  value = "${aws_lb_target_group.lb-tg-front.arn}"
+}
+
+output "elb_target_group_arn_back" {
+  value = "${aws_lb_target_group.lb-tg-back.arn}"
 }
 
 output "elb_securiy_id" {
   value = "${aws_security_group.sg-elb.id}"
+}
+
+output "elb_public_dns_name" {
+  value = "${aws_lb.lb.dns_name}"
 }

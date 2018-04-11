@@ -1,15 +1,18 @@
 [
   {
-    "name": "nginx",
+    "name": "back",
     "image": "${ecr_repository_url}",
     "cpu": 4,
     "memory": 128,
     "essential": true,
     "portMappings": [
       {
-        "containerPort": 80,
+        "containerPort": 8080,
         "hostPort": 0
       }
+    ],
+    "command": [
+      "--spring.profiles.active=production"
     ]
   }
 ]
