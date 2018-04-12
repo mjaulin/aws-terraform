@@ -12,7 +12,8 @@
       }
     ],
     "command": [
-      "--spring.profiles.active=production"
+      "--spring.profiles.active=production",
+      "--server.contextPath=//api"
     ]
   }
 ]
