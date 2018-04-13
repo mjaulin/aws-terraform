@@ -19,7 +19,7 @@ resource "aws_security_group" "sg-ecs" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port       = 0
+    from_port       = 32768
     protocol        = "tcp"
     to_port         = 65535
     security_groups = ["${var.elb_securiy_id}"]

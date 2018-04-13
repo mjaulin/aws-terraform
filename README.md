@@ -1,10 +1,22 @@
 # Aws Terraform
 
+## Requirement
+
+- [AWS Cli](https://aws.amazon.com/fr/cli|AWS cli)
+- [Docker](https://docs.docker.com/install/)
+- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Maven](http://maven.apache.org/download.cgi)
+- [NodeJs](https://nodejs.org/en/download/)
+
+> The Docker daemon port 2375 need to be expose 
+
 ## Initialize AWS
 
 ```
-$ aws configure
+aws configure
 ```
+
+Add AWS Access Key ID and AWS Secret Access Key created in IAM console.
 
 ## Create infrastructure
 
@@ -15,9 +27,7 @@ terraform apply -auto-approve && \
 cd ../../
 ```
 
-## Deploy docker image in ecr
-
-You need to start docker locally before launch this step
+## Deploy docker images in ecr
 
 ```
 cd terraform/appli && \
@@ -25,7 +35,7 @@ terraform init && \
 ./init.sh
 ```
 
-## Deploy container
+## Deploy containers
 
 ```
 terraform apply -auto-approve && \
