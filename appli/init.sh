@@ -12,7 +12,7 @@ API_URL="http://${ELB_PUBLIC_DNS_NAME}/api/"
 CURR=`pwd`
 
 cd ../../test-kotlin/
-mvn clean install -Dimage.name=${ECR_REPOSITORY_URL_BACK}:latest
+mvn clean install -Pdocker -Dimage.name=${ECR_REPOSITORY_URL_BACK}:latest
 cd $CURR
 
 cd ../../test-react/
@@ -29,4 +29,5 @@ sed -i -e "s|^ecr_repository_url_front=.*|ecr_repository_url_front=\"$ECR_REPOSI
        -e "s|^ecs_cluster_id=.*|ecs_cluster_id=\"$ECS_CLUSTER_ID\"|" \
        -e "s|^elb_target_group_arn_front=.*|elb_target_group_arn_front=\"$ELB_TARGET_GROUP_ARN_FRONT\"|" \
        -e "s|^elb_target_group_arn_back=.*|elb_target_group_arn_back=\"$ELB_TARGET_GROUP_ARN_BACK\"|" \
+       -e "s|^elb_public_dns_name=.*|elb_public_dns_name=\"$ELB_PUBLIC_DNS_NAME\"|" \
        terraform.tfvars

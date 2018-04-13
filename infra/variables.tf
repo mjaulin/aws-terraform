@@ -5,7 +5,7 @@ variable "region" {
 
 variable "availability_zones" {
   description = "AWS availability zones"
-
+  type = "list"
   default = [
     "eu-west-3a",
     "eu-west-3b",

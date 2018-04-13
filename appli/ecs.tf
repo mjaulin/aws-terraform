@@ -3,6 +3,7 @@ variable "ecr_repository_url_back" {}
 variable "ecs_cluster_id" {}
 variable "elb_target_group_arn_front" {}
 variable "elb_target_group_arn_back" {}
+variable "elb_public_dns_name" {}
 
 data "template_file" "td-front" {
   template = "${file("task-definitions/front.json")}"
@@ -54,4 +55,8 @@ resource "aws_ecs_service" "ecs-service-back" {
     container_name   = "back"
     container_port   = 8080
   }
+}
+
+output "elb_public_dns_name" {
+  value = "${var.elb_public_dns_name}"
 }

@@ -1,6 +1,17 @@
-resource "aws_iam_instance_profile" "iam-ip" {
+resource "aws_iam_role" "ecs-dynamodb-host-role" {
+  name = "ecs-dynamodb-host-role"
+  assume_role_policy = "${file("${path.module}/policies/ecs-dynamodb-role.json")}"
+}
+
+resource "aws_iam_role_policy" "ecs-dynamodb-instance-role-policy" {
+  name = "ecs-dynamodb-instance-role-policy"
+  policy = "${file("${path.module}/policies/ecs-dynamodb-instance-role-policy.json")}"
+  role = "${aws_iam_role.ecs-dynamodb-host-role.id}"
+}
+
+resource "aws_iam_instance_profile" "ecs-iam-ip" {
   name = "iam-instance-profile"
-  role = "ecsInstanceRole"
+  role = "${aws_iam_role.ecs-dynamodb-host-role.name}"
 }
 
 resource "aws_security_group" "sg-ecs" {
@@ -36,7 +47,7 @@ resource "aws_launch_configuration" "lc" {
   image_id                    = "${var.ami_id}"
   security_groups             = ["${aws_security_group.sg-ecs.id}"]
   user_data                   = "${data.template_file.user_data.rendered}"
-  iam_instance_profile        = "${aws_iam_instance_profile.iam-ip.name}"
+  iam_instance_profile        = "${aws_iam_instance_profile.ecs-iam-ip.name}"
   associate_public_ip_address = true
   key_name                    = "${aws_key_pair.aws-terraform.key_name}"
 
